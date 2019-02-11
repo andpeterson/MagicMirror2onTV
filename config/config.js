@@ -1,6 +1,6 @@
-/* Magic Mirror Config Sample
+/* Magic Mirror on TV configuration file
  *
- * By Michael Teeuw http://michaelteeuw.nl
+ * By Andrew Peterson
  * MIT Licensed.
  *
  * For more information how you can configurate this file
