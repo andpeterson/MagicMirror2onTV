@@ -1,0 +1,139 @@
+/* Magic Mirror Config Sample
+ *
+ * By Michael Teeuw http://michaelteeuw.nl
+ * MIT Licensed.
+ *
+ * For more information how you can configurate this file
+ * See https://github.com/MichMich/MagicMirror#configuration
+ *
+ */
+
+var config = {
+	address: "localhost", // Address to listen on, can be:
+	                      // - "localhost", "127.0.0.1", "::1" to listen on loopback interface
+	                      // - another specific IPv4/6 to listen on a specific interface
+	                      // - "", "0.0.0.0", "::" to listen on any interface
+	                      // Default, when address config is left out, is "localhost"
+	port: 8080,
+	ipWhitelist: ["127.0.0.1", "::ffff:127.0.0.1", "::1"], // Set [] to allow all IP addresses
+	                                                       // or add a specific IPv4 of 192.168.1.5 :
+	                                                       // ["127.0.0.1", "::ffff:127.0.0.1", "::1", "::ffff:192.168.1.5"],
+	                                                       // or IPv4 range of 192.168.3.0 --> 192.168.3.15 use CIDR format :
+	                                                       // ["127.0.0.1", "::ffff:127.0.0.1", "::1", "::ffff:192.168.3.0/28"],
+
+	language: "en",
+	timeFormat: 24,
+	units: "metric",
+
+	modules: [
+		{
+			module: "alert",
+		},
+		{
+			module: "updatenotification",
+			position: "top_bar"
+		},
+		{
+			module: "MMM-WeeklySchedule",
+    			position: "top_left",
+    			header: "Class Schedule",
+    			config: {
+            			schedule: {
+                    			timeslots: [ "8:30", "9:30", "10:30", "11:30", "12:30", "1:30", "2:30", "3:30"],
+                    			lessons: {
+                            			mon: [ "",        "Physics", "Math", "Gym, Makerspace", "Makerspace", "Makerspace", "",           ""],
+                            			tue: [ "",        "Physics", "Math", "Gym",             "",           "Makerspace", "Makerspace", "Makerspace"],
+                            			wed: [ "Physics", "Physics", "Math", "Gym",             "",           "",           "",           ""],
+                            			thu: [ "",        "Physics", "Math", "Gym",             "",           "",           "",           ""],
+                            			fri: [ "Physics", "Physics", "Math", "Gym",             "",           "",           "",           ""]
+                    			}
+            			},
+            			updateInterval: 1 * 60 * 60 * 1000, // every hour
+            			showNextDayAfter: "3:30"
+    			}
+		},
+		{
+			module: "calendar",
+			header: "US Holidays",
+			position: "top_left",
+			config: {
+				calendars: [
+					{
+						symbol: "calendar-check",
+						url: "webcal://www.calendarlabs.com/templates/ical/US-Holidays.ics"
+					}
+				]
+			}
+		},
+		{
+			module: 'MMM-GoogleMapsTraffic',
+            		position: 'top_left',
+            		config: {
+                		key: 'YOUR_KEY',
+                		lat: 37.8262306,
+                		lng: -122.2920096,
+                		height: '300px',
+                		width: '300px'
+                		styledMapType: "transparent",
+                		disableDefaultUI: true,
+                		backgroundColor: 'hsla(0, 0%, 0%, 0)',
+                		markers: [
+                    			{
+                        			lat: 37.8262316,
+                        			lng: -122.2920196,
+                        			fillColor: '#9966ff'
+                    			},
+                		],
+            		},
+		},
+		{
+			module: "compliments",
+			position: "lower_third"
+		},
+		{
+			module: "currentweather",
+			position: "top_right",
+			config: {
+				location: "New York",
+				locationID: "",  //ID from http://bulk.openweathermap.org/sample/; unzip the gz file and find your city
+				appid: "YOUR_OPENWEATHER_API_KEY"
+			}
+		},
+		{
+			module: "weatherforecast",
+			position: "top_right",
+			header: "Weather Forecast",
+			config: {
+				location: "New York",
+				locationID: "5128581",  //ID from https://openweathermap.org/city
+				appid: "YOUR_OPENWEATHER_API_KEY"
+			}
+		},
+		{
+        		module: "MMM-aqicn",
+       			position: "top_right",
+        		header: "Air Quality Index",
+        		config: {
+            			token: "c7b6d35c2debd689769f9bf4aa0db81045586030",
+            			stationName: "Beacon Hill, Seattle, Washington",
+            			showDetails: true
+            }
+        },
+	{
+    		module:     'MMM-3Day-Forecast',
+    		position:   'bottom_left',
+			config: {
+			api_key:    '86ebcb9b1bec4cde9529b267e072e6bb',
+			lat:        47.513998,
+			lon:        -122.256356,
+			units:      'I',
+			lang:       'en',
+			interval:   900000
+		}
+	},
+	]
+
+};
+
+/*************** DO NOT EDIT THE LINE BELOW ***************/
+if (typeof module !== "undefined") {module.exports = config;}
